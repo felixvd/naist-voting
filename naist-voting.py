@@ -62,10 +62,10 @@ def send_invites(newmails, surveyid, collid):
 ### The main script
 import datetime
 import time
-newmails = get_emails()
-#newmails = ['fvdrigalski@gmail.com', 'naiststudentcouncil@gmail.com']
+#newmails = get_emails()
+newmails = ['fvdrigalski@gmail.com', 'naistgsk@gmail.com']
 surveyid = '113230078'     # Student Life Survey
-collectorid = '153163302'
+collectorid = '153163302'  # Student Life Autocollector
 
 # # To start off on day 1:
 # import pickle
@@ -87,7 +87,7 @@ if newmails:
         myfile.write("Sent out the email alerts via gmail. Now trying to invite. \n")
     res = send_invites(newmails, surveyid, collectorid)
     if not res:
-        send_email('naiststudentcouncil@gmail.com', 'Oh fuck', 'Something went wrong with the Surveymonkey script')
+        send_email('naistgsk@gmail.com', 'Oh fuck', 'Something went wrong with the Surveymonkey script')
 
     # Logging
     with open(logfilename, "a") as myfile:
