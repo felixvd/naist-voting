@@ -1,7 +1,7 @@
 # coding: utf-8
 with (open("gmailpassword.txt")) as f:
     gmail_user = "NAISTGSK"
-    gmail_pass = f.readline().splitlines()
+    gmail_pass = f.read().rstrip('\n')
 
 import re
 
