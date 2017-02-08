@@ -1,7 +1,7 @@
 # coding: utf-8
 with (open("gmailpassword.txt")) as f:
     gmail_user = "NAISTGSK"
-    gmail_pass = f.read()
+    gmail_pass = f.readline().splitlines()
 
 import re
 
@@ -19,18 +19,15 @@ def get_emails():
     pop_conn = poplib.POP3_SSL('pop.gmail.com')
     pop_conn.user(gmail_user)
     pop_conn.pass_(gmail_pass)
-    #Get messages from server:
+    # Get messages from server:
     messages0 = [pop_conn.retr(i) for i in range(1, len(pop_conn.list()[1]) + 1)]
     # Concat message pieces:
     messagesB = [b"\n".join(mssg[1]) for mssg in messages0]
-    #Parse message intom an email object:
-    #messages = [parser.Parser().parsestr(mssg) for mssg in messages1]
+    # Parse message intom an email object:
     messages = [email.message_from_bytes(mssg) for mssg in messagesB]
-#     for message in messages:
-#         print(message['subject'])
     pop_conn.quit()
 
-    # Extract all unique NAIST mails from the stack
+    # Check if the addresses are already in the list
     import pickle
     regdmails = pickle.load( open( "naistvoting-addresslog2016.p", "rb" ) )
     newmails = []
