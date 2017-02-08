@@ -22,7 +22,7 @@ def send_invites(newmails, surveyid, collid):
         'type':'email',
         'sender_email': 'naistgsk@gmail.com',
         #'edit_response_type': 'never',
-        'close_date': '2017-02-13T05:00:00+00:00',
+        'close_date': '2017-02-15T05:00:00+00:00',
         'name': 'Auto-Sendout',
         #'anonymous_type': 'fully_anonymous'
     }
