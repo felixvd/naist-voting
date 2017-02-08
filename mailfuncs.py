@@ -54,9 +54,11 @@ def get_emails():
 def send_email(recipient, subject, body):
     import smtplib
     from email.mime.text import MIMEText
+    from email.header import Header
     import traceback
 
     FROM = 'NAIST学生会 / Student Association'
+    FROM = Header(FROM, 'utf-8').encode()
     TO = recipient if type(recipient) is list else [recipient]
     SUBJECT = subject
     TEXT = body
@@ -67,15 +69,12 @@ def send_email(recipient, subject, body):
 
     #### MIMEText alternative try
     msg = MIMEText(body.encode('utf-8'), _charset='utf-8')
-#     msg['Subject'] = subject
-#     msg['From'] = FROM
-#     msg['To'] = TO
+    # msg = MIMEText(body.encode('utf-8'), 'plain',  'utf-8')   #Both seems to work
     try:
         server = smtplib.SMTP("smtp.gmail.com", 587)
         server.ehlo()
         server.starttls()
         server.login(gmail_user, gmail_pass)
-#         server.sendmail(FROM, TO, message)
         server.sendmail(FROM, TO, msg.as_string())
         server.close()
         print('successfully sent the mail')
